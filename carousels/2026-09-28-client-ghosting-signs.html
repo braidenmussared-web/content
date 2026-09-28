@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>builtbybraiden — 3 Signs A Client Is About To Ghost You</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500;1,600;1,700&family=Montserrat:wght@400;500;600;700;800&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --cream:#F0EAE0;--dark:#1A1410;--dark2:#231C17;
+  --rust:#B85A3A;--rust-light:#D97A4A;--gold:#F0C896;
+  --mid:#4A3F38;--muted:#8A7A6A;
+}
+body{background:#0E0B09;font-family:'Montserrat',sans-serif;}
+
+.nav{background:#0A0806;border-bottom:1px solid #2A1A10;padding:14px 24px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100;flex-wrap:wrap;}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;font-weight:600;color:var(--rust-light);margin-right:14px;}
+.nav-btn{background:none;border:1px solid #3A2A1A;color:var(--muted);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;border-radius:2px;cursor:pointer;transition:all .15s;}
+.nav-btn:hover{border-color:var(--rust);color:var(--rust-light);}
+.nav-btn.active{background:var(--rust);border-color:var(--rust);color:var(--cream);}
+
+.main{max-width:1060px;margin:0 auto;padding:40px 24px 80px;}
+.carousel-section{display:none;}.carousel-section.active{display:block;}
+.section-meta{margin-bottom:26px;}
+.section-eyebrow{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--rust);margin-bottom:8px;}
+.section-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:28px;font-weight:600;color:var(--cream);margin-bottom:6px;}
+.section-desc{font-size:12px;color:var(--muted);line-height:1.7;max-width:520px;}
+
+.slide-strip{display:flex;gap:14px;overflow-x:auto;padding-bottom:20px;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:#3A2A1A transparent;}
+.slide-strip::-webkit-scrollbar{height:4px;}.slide-strip::-webkit-scrollbar-thumb{background:#3A2A1A;border-radius:2px;}
+
+.slide{flex:0 0 280px;aspect-ratio:4/5;border-radius:4px;position:relative;overflow:hidden;scroll-snap-align:start;display:flex;flex-direction:column;padding:18px 18px 20px;box-shadow:0 8px 40px rgba(0,0,0,.6);}
+.slide.cream{background:var(--cream);}
+.slide.dark{background:var(--dark);}
+.slide.dark2{background:var(--dark2);}
+
+.slide.photo{padding:0;}
+.photo-bg{position:absolute;inset:0;background-size:cover;background-position:center;}
+.photo-bg::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.018) 0px,rgba(255,255,255,.018) 1px,transparent 1px,transparent 6px);mix-blend-mode:overlay;}
+.photo-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,8,4,.97) 0%,rgba(15,8,4,.65) 40%,rgba(15,8,4,.08) 100%);}
+.slide.photo .inner{position:relative;z-index:2;padding:18px 18px 20px;height:100%;display:flex;flex-direction:column;}
+
+.slide.half{padding:0;}
+.half-img{height:32%;width:100%;overflow:hidden;flex-shrink:0;position:relative;}
+.half-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.half-img::after{content:'';position:absolute;bottom:0;left:0;right:0;height:70%;background:linear-gradient(to top,var(--dark) 0%,transparent 100%);}
+.slide.half .inner{padding:8px 16px 12px;flex:1;display:flex;flex-direction:column;background:var(--dark);}
+
+.slide.half .logo{margin-bottom:6px;}
+.slide.half .label-row{margin-bottom:4px;}
+.slide.half .hl{margin-bottom:4px;font-size:15px;}
+.slide.half .body{font-size:9px;line-height:1.4;}
+.slide.half .footer{padding-top:8px;gap:6px;}
+
+.logo{display:flex;align-items:center;gap:9px;margin-bottom:8px;}
+.logo-mark{width:28px;height:28px;border-radius:50%;background:#18120D;border:1px solid #2E2018;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;overflow:hidden;}
+.logo-mark::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 70% 75%,rgba(184,90,58,.45) 0%,transparent 55%);}
+.logo-mark .bb{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:13px;line-height:1;position:relative;z-index:2;background:linear-gradient(135deg,#F0C896 0%,#D97A4A 45%,#B85A3A 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.logo-text{font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;line-height:1.5;}
+.cream .logo-text{color:var(--mid);}
+.dark .logo-text,.dark2 .logo-text,.photo .logo-text,.half .logo-text{color:rgba(240,234,224,.6);}
+
+.label-row{display:flex;align-items:center;gap:10px;margin-bottom:4px;}
+.rule{width:22px;height:1.5px;flex-shrink:0;background:var(--rust);}
+.eyebrow{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--rust-light);}
+.cream .eyebrow{color:var(--rust);}
+
+.hl{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;line-height:1.05;margin-bottom:6px;}
+.hl.xl{font-size:29px;}.hl.lg{font-size:23px;}.hl.md{font-size:18px;}.hl.sm{font-size:16px;}
+.cream .hl{color:var(--dark);}
+.dark .hl,.dark2 .hl,.photo .hl,.half .hl{color:var(--cream);}
+.r{color:var(--rust);}
+.dark .r,.dark2 .r,.photo .r,.half .r{color:var(--rust-light);}
+.hrule{width:36px;height:1.5px;background:var(--rust);margin-bottom:5px;}
+
+.body{font-size:10px;line-height:1.5;}
+.cream .body{color:var(--mid);}
+.dark .body,.dark2 .body,.photo .body,.half .body{color:rgba(240,234,224,.75);}
+.hi{font-weight:600;}
+.cream .hi{color:var(--dark);}
+.dark .hi,.dark2 .hi,.photo .hi,.half .hi{color:var(--cream);}
+
+.nlist{display:flex;flex-direction:column;gap:0;margin-top:2px;}
+.ni{display:flex;align-items:flex-start;gap:6px;padding:2px 0;}
+.cream .ni{border-bottom:1px solid rgba(26,20,16,.1);}
+.dark .ni,.dark2 .ni{border-bottom:1px solid rgba(240,234,224,.07);}
+.ni:last-child{border-bottom:none;}
+.nn{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:15px;line-height:1;flex-shrink:0;width:16px;color:var(--rust-light);}
+.cream .nn{color:var(--rust);}
+.nt{font-size:7.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:0;}
+.cream .nt{color:var(--dark);}
+.dark .nt,.dark2 .nt{color:var(--cream);}
+.nd{font-size:8.5px;line-height:1.3;}
+.cream .nd{color:var(--mid);}
+.dark .nd,.dark2 .nd{color:rgba(240,234,224,.65);}
+
+.clist{display:flex;flex-direction:column;gap:0;margin-top:2px;}
+.ci{display:flex;align-items:flex-start;gap:6px;padding:1px 0;}
+.cream .ci{border-bottom:1px solid rgba(26,20,16,.1);}
+.dark .ci,.dark2 .ci,.half .ci{border-bottom:1px solid rgba(240,234,224,.07);}
+.ci:last-child{border-bottom:none;}
+.cicon{width:16px;height:16px;border-radius:50%;border:1.5px solid;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:8px;margin-top:1px;}
+.cream .cicon{border-color:var(--rust);color:var(--rust);}
+.dark .cicon,.dark2 .cicon,.half .cicon{border-color:var(--rust-light);color:var(--rust-light);}
+.cicon.bad{border-color:#C0513A!important;color:#C0513A!important;}
+.ct{font-size:9.5px;line-height:1.35;font-weight:500;}
+.cream .ct{color:var(--dark);}
+.dark .ct,.dark2 .ct,.half .ct{color:var(--cream);}
+
+.sblock{display:flex;flex-direction:column;gap:2px;margin-top:2px;}
+.srow{display:flex;flex-direction:column;gap:0;padding-bottom:4px;}
+.cream .srow{border-bottom:1px solid rgba(26,20,16,.1);}
+.dark .srow,.dark2 .srow{border-bottom:1px solid rgba(240,234,224,.07);}
+.srow:last-child{border-bottom:none;}
+.snum{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:24px;color:var(--rust-light);line-height:1;}
+.cream .snum{color:var(--rust);}
+.slabel{font-size:8.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+.cream .slabel{color:var(--dark);}
+.dark .slabel,.dark2 .slabel{color:var(--cream);}
+.sdesc{font-size:9.5px;line-height:1.4;}
+.cream .sdesc{color:var(--mid);}
+.dark .sdesc,.dark2 .sdesc{color:rgba(240,234,224,.6);}
+
+.callout{border-left:2.5px solid var(--rust-light);padding:6px 8px;border-radius:0 4px 4px 0;margin-top:6px;}
+.dark .callout,.dark2 .callout,.photo .callout,.half .callout{background:rgba(184,90,58,.1);}
+.cream .callout{background:rgba(184,90,58,.07);border-color:var(--rust);}
+.calt{font-size:9.5px;line-height:1.45;}
+.cream .calt{color:var(--mid);}
+.dark .calt,.dark2 .calt,.photo .calt,.half .calt{color:rgba(240,234,224,.8);}
+.cali{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;font-weight:600;}
+.cream .cali{color:var(--rust);}
+.dark .cali,.dark2 .cali,.photo .cali,.half .cali{color:var(--rust-light);}
+
+.footer{margin-top:auto;padding-top:8px;flex-shrink:0;display:flex;flex-direction:column;gap:5px;min-height:48px;}
+.arrow-row{display:flex;justify-content:flex-end;}
+.arrow{width:30px;height:30px;border-radius:50%;border:1.5px solid;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.cream .arrow{border-color:var(--rust);color:var(--rust);}
+.dark .arrow,.dark2 .arrow,.photo .arrow,.half .arrow{border-color:rgba(240,234,224,.4);color:rgba(240,234,224,.7);}
+.pbar{display:flex;align-items:center;gap:10px;}
+.ptrack{flex:1;height:2.5px;border-radius:2px;}
+.cream .ptrack{background:rgba(26,20,16,.12);}
+.dark .ptrack,.dark2 .ptrack,.photo .ptrack,.half .ptrack{background:rgba(240,234,224,.1);}
+.pfill{height:100%;border-radius:2px;background:var(--rust);}
+.plabel{font-size:9px;font-weight:600;letter-spacing:.05em;flex-shrink:0;}
+.cream .plabel{color:var(--muted);}
+.dark .plabel,.dark2 .plabel,.photo .plabel,.half .plabel{color:rgba(240,234,224,.35);}
+
+.instructions{margin-top:22px;background:#1A1008;border:1px solid #2A1A10;border-radius:3px;padding:16px 20px;}
+.instructions h3{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--rust);margin-bottom:6px;}
+.instructions p{font-size:12px;color:var(--muted);line-height:1.65;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-brand">builtbybraiden</span>
+  <button class="nav-btn active" onclick="show(1,this)">Client Ghosting Signs</button>
+  <button class="nav-btn" id="export-btn" onclick="exportAll(this)" style="margin-left:auto;border-color:#4A7A4A;color:#7ABF7A;">⬇ Export Slides</button>
+</nav>
+
+<main class="main">
+  <section class="carousel-section active" id="c1">
+    <div class="section-meta">
+      <div class="section-eyebrow">Carousel</div>
+      <div class="section-title">3 Signs A Client Is About To Ghost You</div>
+      <div class="section-desc">Retention-build angle — the quiet warning signs before a coaching client disappears, and what actually catches it.</div>
+    </div>
+    <div class="slide-strip">
+
+      <!-- Slide 1: Photo hook -->
+      <div class="slide photo">
+        <div class="photo-bg" style="background-image:url('https://images.unsplash.com/photo-1648235692910-947cb90ddd97?w=800&q=85')"></div>
+        <div class="photo-overlay"></div>
+        <div class="inner">
+          <div class="logo">
+            <div class="logo-mark"><span class="bb">bb</span></div>
+            <div class="logo-text">builtbybraiden</div>
+          </div>
+          <div style="flex:1"></div>
+          <div class="label-row"><div class="rule"></div><div class="eyebrow">Client Retention</div></div>
+          <div class="hl xl">Your client didn't leave loud.<br>They left <span class="r">quiet</span>.</div>
+          <div class="hrule"></div>
+          <div class="body">By the time you notice, it's already been three weeks.</div>
+          <div class="footer">
+            <div class="arrow-row"><div class="arrow">→</div></div>
+            <div class="pbar"><div class="ptrack"><div class="pfill" style="width:12%"></div></div><span class="plabel">1 / 8</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Cream problem -->
+      <div class="slide cream">
+        <div class="logo">
+          <div class="logo-mark"><span class="bb">bb</span></div>
+          <div class="logo-text">builtbybraiden</div>
+        </div>
+        <div class="label-row"><div class="rule"></div><div class="eyebrow">The Pattern</div></div>
+        <div class="hl lg">Ghosting doesn't start with <span class="r">silence</span></div>
+        <div class="hrule"></div>
+        <div class="body">It starts with small shifts you're too busy to clock. A slower reply. A skipped check-in. By week three it's a no-show — and you're calling it "they just weren't committed."</div>
+        <div class="footer">
+          <div class="arrow-row"><div class="arrow">→</div></div>
+          <div class="pbar"><div class="ptrack"><div class="pfill" style="width:25%"></div></div><span class="plabel">2 / 8</span></div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Dark numbered list -->
+      <div class="slide dark">
+        <div class="logo">
+          <div class="logo-mark"><span class="bb">bb</span></div>
+          <div class="logo-text">builtbybraiden</div>
+        </div>
+        <div class="label-row"><div class="rule"></div><div class="eyebrow">The 3 Signs</div></div>
+        <div class="hl md">What it actually looks like</div>
+        <div class="hrule"></div>
+        <div class="nlist">
+          <div class="ni"><div class="nn">1</div><div><div class="nt">Slower replies</div><div class="nd">24 hours becomes 3 days. Nobody mentions it.</div></div></div>
+          <div class="ni"><div class="nn">2</div><div><div class="nt">Vague check-ins</div><div class="nd">"Yeah good thanks" replaces real updates.</div></div></div>
+          <div class="ni"><div class="nn">3</div><div><div class="nt">Missed without apology</div><div class="nd">A skipped session used to come with an excuse. Now it doesn't.</div></div></div>
+        </div>
+        <div class="footer">
+          <div class="arrow-row"><div class="arrow">→</div></div>
+          <div class="pbar"><div class="ptrack"><div class="pfill" style="width:37%"></div></div><span class="plabel">3 / 8</span></div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Cream stats -->
+      <div class="slide cream">
+        <div class="logo">
+          <div class="logo-mark"><span class="bb">bb</span></div>
+          <div class="logo-text">builtbybraiden</div>
+        </div>
+        <div class="label-row"><div class="rule"></div><div class="eyebrow">Why It Matters</div></div>
+        <div class="hl md">The real cost isn't one client</div>
+        <div class="hrule"></div>
+        <div class="sblock">
+          <div class="srow"><div class="snum">8 wks</div><div class="slabel">Average silence before cancelling</div><div class="sdesc">That's eight weeks of a client quietly deciding to leave.</div></div>
+          <div class="srow"><div class="snum">1 in 3</div><div class="slabel">Never say anything's wrong</div><div class="sdesc">No complaint first. Just a slow fade, then gone.</div></div>
+        </div>
+        <div class="footer">
+          <div class="arrow-row"><div class="arrow">→</div></div>
+          <div class="pbar"><div class="ptrack"><div class="pfill" style="width:50%"></div></div><span class="plabel">4 / 8</span></div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Photo turning point -->
+      <div class="slide photo">
+        <div class="photo-bg" style="background-image:url('https://images.unsplash.com/photo-1770513649465-2c60c8039806?w=800&q=85')"></div>
+        <div class="photo-overlay"></div>
+        <div class="inner">
+          <div class="logo">
+            <div class="logo-mark"><span class="bb">bb</span></div>
+            <div class="logo-text">builtbybraiden</div>
+          </div>
+          <div style="flex:1"></div>
+          <div class="label-row"><div class="rule"></div><div class="eyebrow">The Shift</div></div>
+          <div class="hl lg">Catching it early isn't about being <span class="r">more attentive</span></div>
+          <div class="hrule"></div>
+          <div class="body">It's about not relying on attention at all.</div>
+          <div class="footer">
+            <div class="arrow-row"><div class="arrow">→</div></div>
+            <div class="pbar"><div class="ptrack"><div class="pfill" style="width:62%"></div></div><span class="plabel">5 / 8</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: Dark2 solution -->
+      <div class="slide dark2">
+        <div class="logo">
+          <div class="logo-mark"><span class="bb">bb</span></div>
+          <div class="logo-text">builtbybraiden</div>
+        </div>
+        <div class="label-row"><div class="rule"></div><div class="eyebrow">The Fix</div></div>
+        <div class="hl md">Build the flag, not the habit</div>
+        <div class="hrule"></div>
+        <div class="body" style="margin-bottom:6px;">A system that watches reply times and check-in patterns, and tells you when someone's gone quiet — before they've decided to leave.</div>
+        <div class="clist">
+          <div class="ci"><div class="cicon">✓</div><div class="ct">Day 4 / 9 / 16 check-in cadence, automatic</div></div>
+          <div class="ci"><div class="cicon">✓</div><div class="ct">A flag when a client's pattern changes</div></div>
+          <div class="ci"><div class="cicon">✓</div><div class="ct">One nudge to you — not a chase</div></div>
+        </div>
+        <div class="footer">
+          <div class="arrow-row"><div class="arrow">→</div></div>
+          <div class="pbar"><div class="ptrack"><div class="pfill" style="width:75%"></div></div><span class="plabel">6 / 8</span></div>
+        </div>
+      </div>
+
+      <!-- Slide 7: Cream result -->
+      <div class="slide cream">
+        <div class="logo">
+          <div class="logo-mark"><span class="bb">bb</span></div>
+          <div class="logo-text">builtbybraiden</div>
+        </div>
+        <div class="label-row"><div class="rule"></div><div class="eyebrow">What Changes</div></div>
+        <div class="hl md">Nobody falls through the cracks because your week got busy</div>
+        <div class="hrule"></div>
+        <div class="callout">
+          <div class="cali">"</div>
+          <div class="calt">The client who used to just disappear becomes the client you followed up with in week 3 — instead of writing off in week 8.</div>
+        </div>
+        <div class="footer">
+          <div class="arrow-row"><div class="arrow">→</div></div>
+          <div class="pbar"><div class="ptrack"><div class="pfill" style="width:87%"></div></div><span class="plabel">7 / 8</span></div>
+        </div>
+      </div>
+
+      <!-- Slide 8: Dark CTA -->
+      <div class="slide dark">
+        <div class="logo">
+          <div class="logo-mark"><span class="bb">bb</span></div>
+          <div class="logo-text">builtbybraiden</div>
+        </div>
+        <div class="label-row"><div class="rule"></div><div class="eyebrow">Your Turn</div></div>
+        <div class="hl md">Which sign have you seen <span class="r">this month</span>?</div>
+        <div class="hrule"></div>
+        <div class="body">Drop it below — slower replies, vague check-ins, or the quiet no-show.</div>
+        <div class="footer">
+          <div class="pbar"><div class="ptrack"><div class="pfill" style="width:100%"></div></div><span class="plabel">8 / 8</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+function show(num,btn){
+  document.querySelectorAll('.carousel-section').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(el=>el.classList.remove('active'));
+  document.getElementById('c'+num).classList.add('active');
+  btn.classList.add('active');
+}
+
+async function exportAll(btn) {
+  btn.textContent = 'Loading...';
+  btn.disabled = true;
+  const photoBgs = document.querySelectorAll('.photo-bg');
+  const origUrls = [];
+  for (const bg of photoBgs) {
+    const style = bg.getAttribute('style') || '';
+    const match = style.match(/url\(['"]?(https?:\/\/[^'")\s]+)['"]?\)/);
+    origUrls.push(match ? match[1] : null);
+  }
+  const blobUrls = [];
+  for (let i = 0; i < photoBgs.length; i++) {
+    const url = origUrls[i];
+    if (url) {
+      try {
+        const res = await fetch(url, {mode:'cors'});
+        const blob = await res.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        blobUrls.push(blobUrl);
+        photoBgs[i].style.backgroundImage = `url('${blobUrl}')`;
+      } catch(e) { blobUrls.push(null); }
+    } else { blobUrls.push(null); }
+  }
+  await new Promise(r => setTimeout(r, 400));
+  const sections = document.querySelectorAll('.carousel-section');
+  let slideNum = 1;
+  sections.forEach(s => { s.style.display = 'block'; s.classList.remove('active'); });
+  document.querySelector('.nav').style.display = 'none';
+  for (const section of sections) {
+    const slides = section.querySelectorAll('.slide');
+    const sTitle = section.querySelector('.section-title')?.textContent?.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,'') || 'slide';
+    for (const slide of slides) {
+      btn.textContent = `Saving ${slideNum}...`;
+      const canvas = await html2canvas(slide, {useCORS:true,allowTaint:false,scale:4,logging:false,backgroundColor:null,imageTimeout:10000});
+      await new Promise(resolve => {
+        canvas.toBlob(blob => {
+          const a = document.createElement('a');
+          a.download = `${String(slideNum).padStart(2,'0')}_${sTitle}.png`;
+          a.href = URL.createObjectURL(blob);
+          a.click();
+          setTimeout(resolve, 150);
+        }, 'image/png');
+      });
+      slideNum++;
+    }
+  }
+  document.querySelector('.nav').style.display = '';
+  sections.forEach(s => { s.style.display = ''; });
+  document.querySelector('.carousel-section').classList.add('active');
+  document.querySelector('.nav-btn').classList.add('active');
+  for (let i = 0; i < photoBgs.length; i++) {
+    if (origUrls[i]) photoBgs[i].style.backgroundImage = `url('${origUrls[i]}')`;
+    if (blobUrls[i]) URL.revokeObjectURL(blobUrls[i]);
+  }
+  btn.textContent = `✓ ${slideNum-1} slides saved`;
+  btn.style.borderColor = '#4A7A4A';
+  btn.style.color = '#7ABF7A';
+  setTimeout(() => { btn.textContent = '⬇ Export Slides'; btn.disabled = false; }, 4000);
+}
+</script>
+</body>
+</html>
